@@ -1,30 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
   <head>
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-    <script src="../../../static/lib/js/p5.min.js"></script>
+    <script src="../../../static/lib/js/p5.min.js" th:src="@{/lib/js/p5.min.js}"></script>
     <script>
       let y;
-      // setupは一回だけ呼ばれる
+      // setup縺ｯ荳�蝗槭□縺大他縺ｰ繧後ｋ
       function setup(){
-        createCanvas(720, 400); // createCanvasは必ず最初に呼ばなければならない
-        stroke(255); // 線の色を白にする
-        noLoop();// drawを一度だけ実行
+        createCanvas(720, 400); // createCanvas縺ｯ蠢�縺壽怙蛻昴↓蜻ｼ縺ｰ縺ｪ縺代ｌ縺ｰ縺ｪ繧峨↑縺�
+        stroke(255); // 邱壹�ｮ濶ｲ繧堤區縺ｫ縺吶ｋ
+        noLoop();// draw繧剃ｸ�蠎ｦ縺�縺大ｮ溯｡�
         y = height * 0.5;
       }
-      // drawはプログラムが止まるまで実行する
+      // draw縺ｯ繝励Ο繧ｰ繝ｩ繝�縺梧ｭ｢縺ｾ繧九∪縺ｧ螳溯｡後☆繧�
       function draw(){
-        background(0); // 背景色を黒に設定
+        background(0); // 閭梧勹濶ｲ繧帝ｻ偵↓險ｭ螳�
         y = y - 4;
         if (y < 0) {
           y = height;
         }
         line(0, y, width, y);
       }
-      // mouseでクリックされた場合にdraw()を一度だけ実行する
+      // mouse縺ｧ繧ｯ繝ｪ繝�繧ｯ縺輔ｌ縺溷�ｴ蜷医↓draw()繧剃ｸ�蠎ｦ縺�縺大ｮ溯｡後☆繧�
       function mousePressed(){
         redraw();
       }

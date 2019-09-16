@@ -1,40 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
   <head>
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-    <script src="../../../static/lib/js/p5.min.js"></script>
-    <script>
-      let y;
-      // setupは一回だけ呼ばれる
-      function setup(){
-        createCanvas(720, 400); // createCanvasは必ず最初に呼ばなければならない
-        stroke(255); // 線の色を白にする
-        noLoop();// drawを一度だけ実行
-        y = height * 0.5;
-      }
-      // drawはプログラムが止まるまで実行する
-      function draw(){
-        background(0); // 背景色を黒に設定
-        y = y - 4;
-        if (y < 0) {
-          y = height;
-        }
-        line(0, y, width, y);
-      }
-      // mouseでクリックされた場合にdraw()を一度だけ実行する
-      function mousePressed(){
-        redraw();
-      }
-    </script>
+    <script src="../../../static/lib/js/p5.min.js" th:src="@{/lib/js/p5.min.js}"></script>
   </head>
   <body>
-    <div>
-      <a href="https://p5js.org/examples/structure-no-loop.html">https://p5js.org/examples/structure-no-loop.html</a>
-    </div>
-    <div>
-    </div>
+    <ul th:each="title : ${artGalleryTitles}">
+        <li><a th:href="@{|/toysnest/art_gallery/${title}|}" th:text="${title}"></a></li>
+    </ul>
   </body>
 </html>

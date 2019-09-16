@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="../../../static/lib/js/p5.min.js" th:src="@{/lib/js/p5.min.js}"></script>
+    <script>
+      let moveIndex = 0;
+      function setup(){
+        createCanvas(720, 400);
+        background(51);
+        noStroke();
+        frameRate(10);
+      }
+
+      function draw(){
+        drawTarget(width * 0.25, height * 0.4, 200, 4, moveIndex);
+        drawTarget(width * 0.5, height * 0.5, 300, 10, moveIndex);
+        drawTarget(width * 0.75, height * 0.3, 120, 6, moveIndex);
+        drawTarget(width * 0.85, height * 0.6, 250, 30, moveIndex);
+        moveIndex = ++moveIndex > 1000 ? 0 : moveIndex;
+      }
+      /*
+      * 灰色のグラデーション円を描画
+      * xloc x座標
+      * yloc y座標
+      * size 円の大きさ
+      * num グラデーションの細かさ
+      * moveIndex グラデーションのズレ
+      */
+      function drawTarget(xloc, yloc, size, num, moveIndex){
+        const moveCount = moveIndex % num;
+        const grayValArray = Array.from(Array(num).keys(), index => 255 / num * index);
+        // moveCountの数だけグレーの色の値をずらす
+        for(let key of Array(moveCount).keys()) {
+          grayValArray.unshift(grayValArray.pop());
+        }
+        const steps = size / num;
+        for (let i = 0; i < num; i++){
+          fill(grayValArray[i]);
+          ellipse(xloc, yloc, size - i * steps, size - i * steps);
+        }
+      }
+      // ---------- original ---------
+      // function setup(){
+      //   createCanvas(720, 400);
+      //   background(51);
+      //   noStroke();
+      //   noLoop();
+      // }
+
+      // function draw(){
+      //   drawTarget(width * 0.25, height * 0.4, 200, 4);
+      //   drawTarget(width * 0.5, height * 0.5, 300, 10);
+      //   drawTarget(width * 0.75, height * 0.3, 120, 6);
+      // }
+      // function drawTarget(xloc, yloc, size, num){
+      //   const grayvalues = 255 / num;
+      //   const steps = size / num;
+      //   for (let i = 0; i < num; i++){
+      //     fill(i * grayvalues);
+      //     ellipse(xloc, yloc, size - i * steps, size - i * steps);
+      //   }
+      // }
+    </script>
+  </head>
+  <body>
+    <div>
+      <a href="https://p5js.org/examples/structure-functions.html">https://p5js.org/examples/structure-functions.html</a>
+    </div>
+    <div>
+    </div>
+  </body>
+</html>

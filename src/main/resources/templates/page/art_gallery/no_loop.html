@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
   <head>
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-    <script src="../../../static/lib/js/p5.min.js"></script>
+    <script src="../../../static/lib/js/p5.min.js" th:src="@{/lib/js/p5.min.js}"></script>
     <script>
       let y;
-      // setupは一回だけ呼ばれる
+      // setupは�?回だけ呼ばれる
       function setup(){
-        createCanvas(720, 400); // createCanvasは必ず最初に呼ばなければならない
-        stroke(255); // 線の色を白にする
+        createCanvas(720, 400); // createCanvasは�?ず最初に呼ばなければならな�?
+        stroke(255); // 線�?�色を白にする
         noLoop();
         y = height * 0.5;
       }
-      // drawはプログラムが止まるまで実行する
+      // drawはプログラ�?が止まるまで実行す�?
       function draw(){
-        background(0); // 背景色を黒に設定
+        background(0); // 背景色を黒に設�?
         y = y - 1;
         if (y < 0) {
           y = height;
