@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="../../../static/lib/js/p5.min.js"></script>
+    <script>
+      let y = 100;
+      let frameRateNum = 20;
+      // setupは一回だけ呼ばれる
+      function setup(){
+        createCanvas(720, 400); // createCanvasは必ず最初に呼ばなければならない
+        stroke(255); // 線の色を白にする
+      }
+      // drawはプログラムが止まるまで実行する
+      function draw(){
+        frameRate(frameRateNum);
+        background(0); // 背景色を黒に設定
+        y = y - 1;
+        if (y < 0) {
+          y = height;
+        }
+        line(0, y, width, y);
+      }
+      $(function(){
+        $("#frame_rate_num").text(frameRateNum);
+        $("#range").on("change", function(){
+          const num = $(this).val();
+          frameRateNum = Number(num);
+          $("#frame_rate_num").text(num);
+        });
+      })
+    </script>
+  </head>
+  <body>
+    <div>
+      <a href="https://p5js.org/examples/structure-setup-and-draw.html">https://p5js.org/examples/structure-setup-and-draw.html</a>
+    </div>
+    <div>
+      <label>frame rate : </label>
+      <input type="range" id="range" min="1" max="100">
+      <label> : <span id="frame_rate_num"></span></label>
+    </div>
+  </body>
+</html>

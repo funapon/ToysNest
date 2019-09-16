@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../static/lib/js/p5.min.js"></script>
+    <script>
+      function setup(){
+        createCanvas(800, 800);
+      }
+      function draw(){
+        background(127);
+        noStroke();
+        const pointH = mouseY / 40;
+        const pointW = mouseX / 40;
+        for (
+          let startPointH = 0,
+          startPointW = 0; 
+          startPointH < mouseY; 
+          startPointH += (pointH * 2),startPointW += (pointW * 2)){
+          fill(129, 206, 15);
+          rect(0, startPointH, mouseX, pointH);
+          fill(255);
+          rect(startPointW, 0, pointW, mouseY);
+        }
+
+
+        // for (let i = 0; i < height; i += 20){
+        //   fill(129, 206, 15);
+        //   rect(0, i, width, 10);
+        //   fill(255);
+        //   rect(i, 0, 10, height);
+        // }
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <a href="https://p5js.org/examples/structure-width-and-height.html">https://p5js.org/examples/structure-width-and-height.html</a>
+    </div>
+  </body>
+</html>
