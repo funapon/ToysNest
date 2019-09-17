@@ -10,7 +10,7 @@
   </head>
   <body>
     <ul th:each="title : ${artGalleryTitles}">
-        <li><a th:href="@{|/toysnest/art_gallery/${title}|}" th:text="${title}"></a></li>
+        <li><a th:href="@{|/art_gallery/${title}|}" th:text="${title}"></a></li>
     </ul>
   </body>
 </html>
