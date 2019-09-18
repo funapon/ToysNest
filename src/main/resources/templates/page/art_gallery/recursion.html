@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="../../../static/lib/js/p5.min.js" th:src="@{/lib/js/p5.min.js}"></script>
+  </head>
+  <body>
+    <div>
+      <a href="https://p5js.org/examples/structure-recursion.html">https://p5js.org/examples/structure-recursion.html</a>
+    </div>
+    <p>Original</p>
+    <div id="original"></div>
+    <p>Custom</p>
+    <div id="custom"></div>
+    <script>
+      new p5(function(sketch){
+        sketch.setup = function(){
+          sketch.createCanvas(720, 400);
+          sketch.noStroke();
+          sketch.noLoop();
+        }
+        sketch.draw = function(){
+          drawCircle(sketch.width / 2, 280, 6);
+        }
+        function drawCircle(x, radius, level){
+          const tt = (126 * level) / 4.0;
+          sketch.fill(tt);
+          sketch.ellipse(x, sketch.height / 2, radius * 2, radius * 2);
+          if (level > 1) {
+            level -= 1;
+            drawCircle(x - radius / 2, radius / 2, level);
+            drawCircle(x + radius / 2, radius / 2, level);
+          }
+        }
+      },"original");
+      new p5(function(sketch){
+        sketch.setup = function(){
+          sketch.createCanvas(720, 400);
+          sketch.noStroke();
+          sketch.noLoop();
+        }
+        sketch.draw = function(){
+          drawCircle(sketch.width / 2, 280, 6);
+        }
+        function drawCircle(x, radius, level){
+          const tt = (126 * level) / 4.0;
+          sketch.fill(tt);
+          sketch.ellipse(x, sketch.height / 2, radius * 2, radius * 2);
+          if (level > 1) {
+            level -= 1;
+            drawCircle(x - radius / 2, radius / 2, level);
+            drawCircle(x + radius / 2, radius / 2, level);
+          }
+        }
+      },"custom");
+    </script>
+  </body>
+</html>
