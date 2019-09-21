@@ -17,6 +17,7 @@
     <p>Custom</p>
     <div id="custom"></div>
     <script>
+      // オリジナル -------------------------------------
       new p5(function(sketch){
         sketch.setup = function(){
           sketch.createCanvas(720, 400);
@@ -37,23 +38,51 @@
           }
         }
       },"original");
+      // 独自 ---------------------------------
       new p5(function(sketch){
         sketch.setup = function(){
-          sketch.createCanvas(720, 400);
+          sketch.createCanvas(720, 560);
           sketch.noStroke();
           sketch.noLoop();
         }
         sketch.draw = function(){
-          drawCircle(sketch.width / 2, 280, 6);
+          // 原点をcanvasの中心にする
+          sketch.translate(sketch.width / 2, sketch.height / 2);
+          drawCenter(20, 6);
+          for(let a = 0; a <= 360; a += 22.5){
+            //回転する
+            sketch.rotate(sketch.radians(a));
+            drawPetal(sketch.height / 4, sketch.height / 4 - 30, 10);
+          }
         }
-        function drawCircle(x, radius, level){
+        /**
+        * 花の中心を描く
+        * radius : 半径
+        * level : 入れ子数
+        */
+        function drawCenter(radius, level){
           const tt = (126 * level) / 4.0;
           sketch.fill(tt);
-          sketch.ellipse(x, sketch.height / 2, radius * 2, radius * 2);
+          sketch.ellipse(0, 0, radius * 2, radius * 2);
           if (level > 1) {
-            level -= 1;
-            drawCircle(x - radius / 2, radius / 2, level);
-            drawCircle(x + radius / 2, radius / 2, level);
+            drawCenter(radius * 0.7, --level);
+          }
+        }
+        /**
+        * 花びらを描く
+        * y : Y座標
+        * radius : 半径
+        * level : 入れ子数
+        */
+        function drawPetal(y, radius, level){
+          // 色合いの決定
+          const tt = 255 - 20 * level;
+          sketch.fill(tt);
+          // 円を描く
+          sketch.ellipse(0, -y, radius * 0.4, radius * 2);
+          // 再帰処理
+          if (level > 1) {
+            drawPetal(y * 0.9, y * 0.9 - 20, --level);
           }
         }
       },"custom");
