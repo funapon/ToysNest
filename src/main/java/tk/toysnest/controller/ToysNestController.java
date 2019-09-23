@@ -27,6 +27,7 @@ public class ToysNestController {
                         "functions",
                         "mouse_ellipse",
                         "no_loop",
+                        "recursion",
                         "redraw",
                         "setup_and_draw",
                         "width_and_height");
