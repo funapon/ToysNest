@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="../../../static/lib/js/p5.min.js" th:src="@{/lib/js/p5.min.js}"></script>
+  </head>
+  <body>
+    <div>
+      <a href="https://p5js.org/examples/structure-create-graphics.html">https://p5js.org/examples/structure-create-graphics.html</a>
+    </div>
+    <p>Original</p>
+    <div id="original"></div>
+    <p>Custom</p>
+    <div id="custom"></div>
+    <script>
+      // オリジナル -------------------------------------
+      let pg;
+      new p5(function(sketch){
+        sketch.setup = function(){
+          sketch.createCanvas(710, 400);
+          pg = sketch.createGraphics(400, 250);
+        }
+        sketch.draw = function(){
+          sketch.fill(0, 12);
+          sketch.rect(0, 0, sketch.width, sketch.height);
+          sketch.fill(255);
+          sketch.noStroke();
+          sketch.ellipse(sketch.mouseX, sketch.mouseY, 60, 60);
+
+          pg.background(51);
+          pg.noFill();
+          pg.stroke(255);
+          pg.ellipse(sketch.mouseX - 150, sketch.mouseY - 75, 60, 60);
+          //Draw the offscreen buffer to the screen with image()
+          sketch.image(pg, 150, 75);
+        }
+      },"original");
+      // 独自 ---------------------------------
+      new p5(function(sketch){
+        sketch.setup = function(){
+          sketch.createCanvas(710, 400);
+          pg = sketch.createGraphics(400, 250);
+        }
+        sketch.draw = function(){
+          sketch.fill(0, 12);
+          sketch.rect(0, 0, sketch.width, sketch.height);
+          sketch.fill(255);
+          sketch.noStroke();
+          sketch.ellipse(sketch.mouseX, sketch.mouseY, 60, 60);
+
+          pg.background(51);
+          pg.noFill();
+          pg.stroke(255);
+          pg.ellipse(sketch.mouseX - 150, sketch.mouseY - 75, 60, 60);
+          //Draw the offscreen buffer to the screen with image()
+          sketch.image(pg, 150, 75);
+        }
+      },"custom");
+    </script>
+  </body>
+</html>
