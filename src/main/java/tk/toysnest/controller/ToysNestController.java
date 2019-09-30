@@ -30,7 +30,8 @@ public class ToysNestController {
                         "recursion",
                         "redraw",
                         "setup_and_draw",
-                        "width_and_height");
+                        "width_and_height",
+                        "create_graphics");
         model.addAttribute("artGalleryTitles", artGalleryTitles);
     	return "page/art_gallery/index";
     }

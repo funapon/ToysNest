@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="../../../static/lib/js/p5.min.js" th:src="@{/lib/js/p5.min.js}"></script>
+  </head>
+  <body>
+    <div>
+      <a href="https://p5js.org/examples/structure-create-graphics.html">https://p5js.org/examples/structure-create-graphics.html</a>
+    </div>
+    <p>Original</p>
+    <div id="original"></div>
+    <p>Custom</p>
+    <div id="custom"></div>
+    <script>
+      // オリジナル -------------------------------------
+      new p5(function(sketch){
+        let pg;
+        sketch.setup = function(){
+          sketch.createCanvas(710, 400);
+          pg = sketch.createGraphics(400, 250);
+        }
+        sketch.draw = function(){
+          sketch.fill(0, 12);
+          sketch.rect(0, 0, sketch.width, sketch.height);
+          sketch.fill(255);
+          sketch.noStroke();
+          sketch.ellipse(sketch.mouseX, sketch.mouseY, 60, 60);
+
+          pg.background(51);
+          pg.noFill();
+          pg.stroke(255);
+          pg.ellipse(sketch.mouseX - 150, sketch.mouseY - 75, 60, 60);
+          //Draw the offscreen buffer to the screen with image()
+          sketch.image(pg, 150, 75);
+        }
+      },"original");
+      // 独自 ---------------------------------
+      new p5(function(sketch){
+        // 格子のサイズ
+        const CUBE_SIZE = 20;
+        // キャンバス横幅
+        const CANVAS_WIDTH = 700;
+        // キャンバス縦幅
+        const CANVAS_HEIGHT = 400;
+        // 行数
+        const ROW_COUNT = CANVAS_HEIGHT / CUBE_SIZE;
+        // 列数
+        const COL_COUNT = CANVAS_WIDTH / CUBE_SIZE;
+        // 格子オブジェクト群
+        const cubes = [];
+        // 奇数か否かを判定する関数
+        const isOdd = num => (num % 2) === 1;
+        // 格子オブジェクト
+        class Cube {
+          x;
+          y;
+          graphics;
+          constructor(x, y, graphics){
+            this.x = x;
+            this.y = y;
+            this.graphics = graphics;
+          }
+        }
+        sketch.setup = function(){
+          sketch.createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+          // 行数、列数でチェック柄になるように格子オブジェクトを生成
+          for(let rowNum = 1; rowNum <= ROW_COUNT; rowNum++){
+            for(let colNum = 1; colNum <= COL_COUNT; colNum++){
+              if(isOdd(rowNum) === isOdd(colNum)){
+                const x = (colNum - 1) * CUBE_SIZE;
+                const y = (rowNum - 1) * CUBE_SIZE;
+                cubes.push(new Cube(x, y, sketch.createGraphics(CUBE_SIZE, CUBE_SIZE)));
+              }
+            }
+          }
+        }
+        sketch.draw = function(){
+          // 全体の描画
+          sketch.fill(0, 12);
+          sketch.rect(0, 0, sketch.width, sketch.height);
+          sketch.fill(255);
+          sketch.noStroke();
+          sketch.ellipse(sketch.mouseX, sketch.mouseY, 60, 60);
+          // 格子の描画
+          cubes.forEach(cube => {
+            const pg = cube.graphics;
+            pg.background(123);
+            // pg.fill(123);
+            pg.noStroke();
+            pg.ellipse(sketch.mouseX - cube.x, sketch.mouseY - cube.y, 60, 60);
+            //Draw the offscreen buffer to the screen with image()
+            sketch.image(pg, cube.x, cube.y);
+          });
+        }
+      },"custom");
+    </script>
+  </body>
+</html>
