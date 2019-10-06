@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="../../../static/lib/js/p5.min.js" th:src="@{/lib/js/p5.min.js}"></script>
+  </head>
+  <body>
+    <div>
+      <a href="https://p5js.org/examples/form-points-and-lines.html">https://p5js.org/examples/form-points-and-lines.html</a>
+    </div>
+    <p>Original</p>
+    <div id="original"></div>
+    <p>Custom</p>
+    <div id="custom"></div>
+    <script>
+      // オリジナル -------------------------------------
+      new p5(function(sketch){
+        sketch.setup = function(){
+          let d = 70;
+          let p1 = d;
+          let p2 = p1 + d;
+          let p3 = p2 + d;
+          let p4 = p3 + d;
+          sketch.createCanvas(720, 400);
+          sketch.background(0);
+          sketch.noSmooth();
+          sketch.translate(140, 0);
+
+          // Draw gray box
+          sketch.stroke(153);
+          sketch.line(p3, p3, p2, p3);
+          sketch.line(p2, p3, p2, p2);
+          sketch.line(p2, p2, p3, p2);
+          sketch.line(p3, p2, p3, p3);
+          // Draw white points
+          sketch.stroke(255);
+          sketch.point(p1, p1);
+          sketch.point(p1, p3);
+          sketch.point(p2, p4);
+          sketch.point(p3, p1);
+          sketch.point(p4, p2);
+          sketch.point(p4, p4);
+        }
+      },"original");
+      // 独自 ---------------------------------
+      new p5(function(sketch){
+        sketch.setup = function(){
+          let d = 70;
+          let p1 = d;
+          let p2 = p1 + d;
+          let p3 = p2 + d;
+          let p4 = p3 + d;
+          sketch.createCanvas(720, 400);
+          sketch.background(0);
+          sketch.noSmooth();
+          sketch.translate(140, 0);
+
+          // Draw gray box
+          sketch.stroke(153);
+          sketch.line(p3, p3, p2, p3);
+          sketch.line(p2, p3, p2, p2);
+          sketch.line(p2, p2, p3, p2);
+          sketch.line(p3, p2, p3, p3);
+          // Draw white points
+          sketch.stroke(255);
+          sketch.point(p1, p1);
+          sketch.point(p1, p3);
+          sketch.point(p2, p4);
+          sketch.point(p3, p1);
+          sketch.point(p4, p2);
+          sketch.point(p4, p4);
+        }
+      },"custom");
+    </script>
+  </body>
+</html>
